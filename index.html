@@ -5,7 +5,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
+    <!--Add defer for script to run after dom elements exist-->
+    <script src="script.js" defer></script>
   </head>
-  <body></body>
+  <body>
+    <div id="calculator">
+      <input id="calculator__display" />
+      <div id="calculator__buttons">
+        <div class="calculator__row">
+          <button class="button--lg">AC</button>
+          <button>DEL</button>
+          <button>%</button>
+        </div>
+        <div class="calculator__row">
+          <button>7</button>
+          <button>8</button>
+          <button>9</button>
+          <button>x</button>
+        </div>
+        <div class="calculator__row">
+          <button>4</button>
+          <button>5</button>
+          <button>6</button>
+          <button>-</button>
+        </div>
+        <div class="calculator__row">
+          <button>1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>+</button>
+        </div>
+        <div class="calculator__row">
+          <button class="button--lg">0</button>
+          <button>.</button>
+          <button>=</button>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
