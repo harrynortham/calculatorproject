@@ -2,9 +2,9 @@ let displayValue = "";
 let number = 0;
 let operator = "";
 let secondNumber = 0;
-let displayElement = document.getElementById("calculator__display");
-let buttonsContainerElement = document.getElementById("calculator__buttons");
-let buttons = buttonsContainerElement.getElementsByTagName("button");
+let display = document.getElementById("calculator__display__text");
+let buttonContainer = document.getElementById("calculator__buttons");
+let buttons = buttonContainer.getElementsByTagName("button");
 
 console.log(buttons);
 
@@ -23,8 +23,6 @@ function multiply(a, b) {
 function divide(a, b) {
   return a / b;
 }
-console.log(displayElement);
-displayElement.value = "nothing to display";
 
 function operate(number, operator, secondNumber) {
   switch (operator) {
