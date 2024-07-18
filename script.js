@@ -3,6 +3,10 @@ let number = 0;
 let operator = "";
 let secondNumber = 0;
 let displayElement = document.getElementById("calculator__display");
+let buttonsContainerElement = document.getElementById("calculator__buttons");
+let buttons = buttonsContainerElement.getElementsByTagName("button");
+
+console.log(buttons);
 
 function add(a, b) {
   return a + b;

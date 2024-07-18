@@ -6,16 +6,18 @@
 
 html {
   margin: 0;
+  padding: 1rem;
   background: #f6f6f6;
 }
 
 #calculator {
   margin: auto;
-  max-width: 380px;
+  max-width: 400px;
   background-color: white;
   aspect-ratio: 2/3;
   border-radius: var(--border-radius-lg);
   padding: 1rem;
+  margin: auto;
   display: flex;
   flex-direction: column;
 }
@@ -26,6 +28,16 @@ html {
   height: 5rem;
   padding: 1rem;
   margin-bottom: 1rem;
+  background-color: #ececec;
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+#calculator__display__text {
+  font-weight: bold;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 #calculator__buttons {
