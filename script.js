@@ -5,6 +5,7 @@ let secondNumber = 0;
 let display = document.getElementById("calculator__display__text");
 let buttonContainer = document.getElementById("calculator__buttons");
 let buttons = buttonContainer.getElementsByTagName("button");
+buttons = Array.from(buttons);
 
 function add(a, b) {
   return a + b;
@@ -44,11 +45,16 @@ function operate(number, operator, secondNumber) {
 }
 
 //make array from html collection and give each one click function
-const buttonActions = Array.from(buttons).forEach((element) => {
+buttons.forEach((element) => {
   element.addEventListener("click", () => {
-    updateDisplay(element.id);
     // add here a switch that will perform different function for each key
+    if (operator == "") {
+      displayValue = displayValue.concat(element.id);
+      updateDisplay(displayValue);
+    }
 
     //same function for the number keys
   });
 });
+
+console.log(buttons);
