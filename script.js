@@ -1,30 +1,39 @@
-let displayValue = "";
-let number = 0;
+let number = "";
 let operator = "";
-let secondNumber = 0;
+let secondNumber = "";
 let display = document.getElementById("calculator__display__text");
 let buttonContainer = document.getElementById("calculator__buttons");
-let buttons = buttonContainer.getElementsByTagName("button");
-buttons = Array.from(buttons);
+let buttons = Array.from(buttonContainer.getElementsByTagName("button"));
 
-function clearDisplay() {
-  displayValue = "";
-  number = 0;
+function resetCalculator() {
+  number = "";
   operator = "";
-  secondNumber = 0;
-  updateDisplay(displayValue);
+  secondNumber = "";
+  updateNumber(number);
 }
 
 function deleteLastDigit() {
-  //we will work with the displayValue string
-  let arr = [...displayValue]; //use spread operator
+  let arr = [...number]; //use spread operator
   arr.pop();
-  let newValue = "";
+  let newNumber = "";
   arr.map((number) => {
-    newValue = newValue.concat(number);
+    newNumber = newNumber.concat(number);
   });
-  displayValue = "";
-  updateDisplay(newValue);
+  number = "";
+  updateNumber(newNumber);
+}
+
+function updateNumber(value) {
+  number = number.concat(value); //numbers from parameter is string
+  display.innerText = number;
+}
+
+function addDot() {
+  if ([...number].includes(".")) {
+    return; //only allow one decimal to be added
+  } else {
+    updateNumber(".");
+  }
 }
 
 function add(a, b) {
@@ -41,25 +50,6 @@ function multiply(a, b) {
 
 function divide(a, b) {
   return a / b;
-}
-
-function updateDisplay(value) {
-  //we need receive in the parameter the numbers as strings
-  if (displayValue !== "") {
-    displayValue = displayValue.concat(value);
-    display.innerText = displayValue;
-  } else {
-    displayValue = value;
-    display.innerText = displayValue;
-  }
-}
-
-function addDot(value) {
-  if ([...displayValue].includes(".")) {
-    return;
-  } else {
-    updateDisplay(value);
-  }
 }
 
 function operate(number, operator, secondNumber) {
@@ -79,49 +69,68 @@ function operate(number, operator, secondNumber) {
   }
 }
 
+function handleNumber(value) {
+  updateNumber(value);
+}
+
 //make array from html collection and give each one click function
 buttons.forEach((element) => {
-  element.addEventListener("mousedown", (e) => {
+  element.addEventListener("click", (e) => {
     // add here a switch that will perform different function for each key
     switch (element.id) {
+      case "plus":
+        handleOperator("+");
+        break;
+      case "minus":
+        handleOperator("-");
+        break;
+      case "times":
+        handleOperator("*");
+        break;
+      case "divide":
+        handleOperator("%");
+        break;
+      case "equals":
+        handleOperator("=");
+        break;
       case "allclear":
-        clearDisplay();
+        resetCalculator();
         break;
       case "delete":
         deleteLastDigit();
         break;
       case "dot":
-        addDot(".");
+        addDot();
         break;
       case "zero":
-        updateDisplay("0");
+        handleNumber("0");
         break;
       case "one":
-        updateDisplay("1");
+        handleNumber("1");
         break;
       case "two":
-        updateDisplay("2");
+        handleNumber("2");
         break;
       case "three":
-        updateDisplay("3");
+        handleNumber("3");
         break;
       case "four":
-        updateDisplay("4");
+        handleNumber("4");
         break;
       case "five":
-        updateDisplay("5");
+        handleNumber("5");
         break;
       case "six":
-        updateDisplay("6");
+        handleNumber("6");
         break;
       case "seven":
-        updateDisplay("7");
+        handleNumber("7");
         break;
       case "eight":
-        updateDisplay("8");
+        handleNumber("8");
         break;
       case "nine":
-        updateDisplay("9");
+        handleNumber("9");
         break;
     }
   });
