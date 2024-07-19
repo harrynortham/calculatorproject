@@ -1,3 +1,4 @@
+let displayNumber = "";
 let number = "";
 let operator = "";
 let secondNumber = "";
@@ -5,34 +6,35 @@ let display = document.getElementById("calculator__display__text");
 let buttonContainer = document.getElementById("calculator__buttons");
 let buttons = Array.from(buttonContainer.getElementsByTagName("button"));
 
+function updateDisplay(value) {
+  displayNumber = displayNumber.concat(value); //numbers from parameter is string
+  display.innerText = displayNumber;
+}
+
 function resetCalculator() {
+  displayNumber = "";
   number = "";
   operator = "";
   secondNumber = "";
-  updateNumber(number);
+  updateDisplay(number);
 }
 
 function deleteLastDigit() {
-  let arr = [...number]; //use spread operator
+  let arr = [...displayNumber]; //use spread operator
   arr.pop();
   let newNumber = "";
   arr.map((number) => {
     newNumber = newNumber.concat(number);
   });
-  number = "";
-  updateNumber(newNumber);
-}
-
-function updateNumber(value) {
-  number = number.concat(value); //numbers from parameter is string
-  display.innerText = number;
+  displayNumber = "";
+  updateDisplay(newNumber);
 }
 
 function addDot() {
-  if ([...number].includes(".")) {
+  if ([...displayNumber].includes(".")) {
     return; //only allow one decimal to be added
   } else {
-    updateNumber(".");
+    updateDisplay(".");
   }
 }
 
@@ -54,86 +56,53 @@ function divide(a, b) {
 
 function operate(number, operator, secondNumber) {
   switch (operator) {
-    case "add":
+    case "+":
       add(number, secondNumber);
       break;
-    case "subtract":
+    case "-":
       subtract(number, secondNumber);
       break;
-    case "multiply":
+    case "*":
       multiply(number, secondNumber);
       break;
-    case "divide":
+    case "/":
       divide(number, secondNumber);
       break;
   }
 }
 
 function handleNumber(value) {
-  updateNumber(value);
+  if (operator !== "") {
+    // clear screen and allow player to enter more values
+  } else {
+    updateDisplay(value);
+  }
 }
 
-//make array from html collection and give each one click function
-buttons.forEach((element) => {
-  element.addEventListener("click", (e) => {
-    // add here a switch that will perform different function for each key
-    switch (element.id) {
-      case "plus":
-        handleOperator("+");
-        break;
-      case "minus":
-        handleOperator("-");
-        break;
-      case "times":
-        handleOperator("*");
-        break;
-      case "divide":
-        handleOperator("%");
-        break;
-      case "equals":
-        handleOperator("=");
-        break;
-      case "allclear":
-        resetCalculator();
-        break;
-      case "delete":
-        deleteLastDigit();
-        break;
-      case "dot":
-        addDot();
-        break;
-      case "zero":
-        handleNumber("0");
-        break;
-      case "one":
-        handleNumber("1");
-        break;
-      case "two":
-        handleNumber("2");
-        break;
-      case "three":
-        handleNumber("3");
-        break;
-      case "four":
-        handleNumber("4");
-        break;
-      case "five":
-        handleNumber("5");
-        break;
-      case "six":
-        handleNumber("6");
-        break;
-      case "seven":
-        handleNumber("7");
-        break;
-      case "eight":
-        handleNumber("8");
-        break;
-      case "nine":
-        handleNumber("9");
-        break;
-    }
+buttons.forEach((el) => {
+  el.addEventListener("click", (e) => {
+    const actionMap = {
+      plus: () => handleOperator("+"),
+      minus: () => handleOperator("-"),
+      times: () => handleOperator("*"),
+      divide: () => handleOperator("/"),
+      equals: () => handleOperator("="),
+      allclear: resetCalculator,
+      delete: deleteLastDigit,
+      dot: addDot,
+      zero: () => handleNumber("0"),
+      one: () => handleNumber("1"),
+      two: () => handleNumber("2"),
+      three: () => handleNumber("3"),
+      four: () => handleNumber("4"),
+      five: () => handleNumber("5"),
+      six: () => handleNumber("6"),
+      seven: () => handleNumber("7"),
+      eight: () => handleNumber("8"),
+      nine: () => handleNumber("9"),
+    };
+
+    const action = actionMap[el.id];
+    if (action) action();
   });
 });
-
-console.log(buttons);
