@@ -18,9 +18,16 @@ function clearDisplay() {
 function deleteLastDigit() {
   //we will work with the displayValue string
   console.log("Delete last digit from" + " " + displayValue);
-
-  //ensure we send the updateDisplay function a string
-  //updateDisplay(digits);
+  let arr = [];
+  arr = [...displayValue]; //use spread operator
+  arr.pop();
+  let newValue = "";
+  arr.map((number) => {
+    newValue = newValue.concat(number);
+  });
+  console.log(newValue);
+  displayValue = "";
+  updateDisplay(newValue);
 }
 
 function add(a, b) {
