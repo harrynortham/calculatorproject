@@ -71,6 +71,13 @@ function operate(number, operator, secondNumber) {
   }
 }
 
+function handleOperator(value) {
+  operator = value;
+  console.log("operator click:" + " " + value);
+
+  //clear display
+}
+
 function handleNumber(value) {
   if (operator !== "") {
     // clear screen and allow player to enter more values
@@ -83,7 +90,7 @@ buttons.forEach((el) => {
   el.addEventListener("click", (e) => {
     const actionMap = {
       plus: () => handleOperator("+"),
-      minus: () => handleOperator("-"),
+      subtract: () => handleOperator("-"),
       times: () => handleOperator("*"),
       divide: () => handleOperator("/"),
       equals: () => handleOperator("="),
