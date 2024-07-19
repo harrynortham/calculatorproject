@@ -7,12 +7,20 @@ let buttonContainer = document.getElementById("calculator__buttons");
 let buttons = buttonContainer.getElementsByTagName("button");
 buttons = Array.from(buttons);
 
-function allclear() {
+function clearDisplay() {
   displayValue = "";
   number = 0;
   operator = "";
   secondNumber = 0;
   updateDisplay(displayValue);
+}
+
+function deleteLastDigit() {
+  //we will work with the displayValue string
+  console.log("Delete last digit from" + " " + displayValue);
+
+  //ensure we send the updateDisplay function a string
+  //updateDisplay(digits);
 }
 
 function add(a, b) {
@@ -32,8 +40,17 @@ function divide(a, b) {
 }
 
 function updateDisplay(value) {
-  displayValue = displayValue.concat(value);
-  display.innerText = displayValue;
+  //we need receive in the parameter the numbers as strings
+  value.toString(); //just in case
+  if (displayValue !== "") {
+    displayValue = displayValue.concat(value);
+    console.log(displayValue);
+    display.innerText = displayValue;
+  } else {
+    displayValue = value;
+    console.log(displayValue);
+    display.innerText = displayValue;
+  }
 }
 
 function operate(number, operator, secondNumber) {
@@ -59,41 +76,42 @@ buttons.forEach((element) => {
     // add here a switch that will perform different function for each key
     switch (element.id) {
       case "allclear":
-        allclear();
+        clearDisplay();
+        break;
+      case "delete":
+        deleteLastDigit();
         break;
       case "zero":
-        updateDisplay(0);
+        updateDisplay("0");
         break;
       case "one":
-        updateDisplay(1);
+        updateDisplay("1");
         break;
       case "two":
-        updateDisplay(2);
+        updateDisplay("2");
         break;
       case "three":
-        updateDisplay(3);
+        updateDisplay("3");
         break;
       case "four":
-        updateDisplay(4);
+        updateDisplay("4");
         break;
       case "five":
-        updateDisplay(5);
+        updateDisplay("5");
         break;
       case "six":
-        updateDisplay(6);
+        updateDisplay("6");
         break;
       case "seven":
-        updateDisplay(7);
+        updateDisplay("7");
         break;
       case "eight":
-        updateDisplay(8);
+        updateDisplay("8");
         break;
       case "nine":
-        updateDisplay(9);
+        updateDisplay("9");
         break;
     }
-
-    //same function for the number keys
   });
 });
 
