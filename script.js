@@ -17,15 +17,12 @@ function clearDisplay() {
 
 function deleteLastDigit() {
   //we will work with the displayValue string
-  console.log("Delete last digit from" + " " + displayValue);
-  let arr = [];
-  arr = [...displayValue]; //use spread operator
+  let arr = [...displayValue]; //use spread operator
   arr.pop();
   let newValue = "";
   arr.map((number) => {
     newValue = newValue.concat(number);
   });
-  console.log(newValue);
   displayValue = "";
   updateDisplay(newValue);
 }
@@ -48,15 +45,20 @@ function divide(a, b) {
 
 function updateDisplay(value) {
   //we need receive in the parameter the numbers as strings
-  value.toString(); //just in case
   if (displayValue !== "") {
     displayValue = displayValue.concat(value);
-    console.log(displayValue);
     display.innerText = displayValue;
   } else {
     displayValue = value;
-    console.log(displayValue);
     display.innerText = displayValue;
+  }
+}
+
+function addDot(value) {
+  if ([...displayValue].includes(".")) {
+    return;
+  } else {
+    updateDisplay(value);
   }
 }
 
@@ -79,7 +81,7 @@ function operate(number, operator, secondNumber) {
 
 //make array from html collection and give each one click function
 buttons.forEach((element) => {
-  element.addEventListener("click", () => {
+  element.addEventListener("mousedown", (e) => {
     // add here a switch that will perform different function for each key
     switch (element.id) {
       case "allclear":
@@ -87,6 +89,9 @@ buttons.forEach((element) => {
         break;
       case "delete":
         deleteLastDigit();
+        break;
+      case "dot":
+        addDot(".");
         break;
       case "zero":
         updateDisplay("0");
